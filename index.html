@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Life Calendar</title>
+    </head>
+    <div class="general">
+    <h1>Life Calendar</h1>
+    <body>
+        <div id= "year" class="years">
+ 
+        </div>
+    </div>
+            
+        <script>
+            let htmlyear ="";
+            let count = 0;
+            let CheckBoxState = []
+
+            if (localStorage.getItem("LifeCalendar") === null) {
+            for (year = 0;year<91;year++){
+
+                let htmlweek ="";
+
+                for(week = 0;week<52;week++)
+                    {
+                        
+                        htmlweek += "<input type='checkbox' id="+count+" onchange='Check("+count+")'/>";
+                        CheckBoxState.push(false);
+                        count += 1; 
+                    }
+                htmlyear += "<div class='weeks' ><p>AN "+year+"</p>"+htmlweek+"</div>"
+                document.getElementById("year").innerHTML = htmlyear;
+                localStorage.setItem("LifeCalendar", JSON.stringify(CheckBoxState));
+                
+                }
+
+            } else {
+                CheckBoxState = JSON.parse(localStorage.getItem("LifeCalendar"));
+
+                for (year = 0;year<91;year++){
+
+                    let htmlweek ="";
+
+                    for(week = 0;week<52;week++)
+                        {
+                            if (CheckBoxState[count] == true){
+                                htmlweek += "<input type='checkbox' id="+count+" onchange='Check("+count+")' checked/>";
+                                console.log("chaise")
+                        } else {
+                                htmlweek += "<input type='checkbox' id="+count+" onchange='Check("+count+")'/>";
+                        }
+                            count += 1; 
+                        }
+                    htmlyear += "<div class='weeks' ><p>AN "+year+"</p>"+htmlweek+"</div>"
+                    document.getElementById("year").innerHTML = htmlyear;
+                    }
+            }
+
+        </script>
+
+        <script>
+            function Check(value) {
+                var state = document.getElementById(value).checked;
+                /*console.log(value,state);*/
+                CheckBoxState[value] = state;
+                /*console.log(CheckBoxState[value]);*/
+                localStorage.setItem("LifeCalendar", JSON.stringify(CheckBoxState));
+            };
+        </script>
+    </body>
+</html>
