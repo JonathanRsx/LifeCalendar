@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Life Calendar</title>
+  </head>
+  <body>
+    <div class="general">
+      <header>
+        <h1>Life Calendar</h1>
+        <div style="display: flex; align-items: center; gap: 32px">
+          <p id="loader" style="display: none">Saving...</p>
+          <p id="user-pseudo">Pseudo</p>
+          <button id="logout-btn">Déconnexion</button>
+        </div>
+      </header>
+
+      <div id="year" class="years"></div>
+    </div>
+
+    <script src="calendar.js"></script>
+    <script src="logout.js"></script>
+  </body>
+</html>

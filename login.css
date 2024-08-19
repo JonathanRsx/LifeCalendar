@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500&display=swap");
+
+body {
+  background: #cecece;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: "Hind Siliguri", sans-serif;
+}
+
+.general {
+  text-align: center;
+}
+
+h1 {
+  color: rgba(125, 125, 125, 0.8);
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+#auth-container {
+  background: #cecece;
+  padding: 30px 20px;
+  border-radius: 20px;
+  box-shadow: -10px -10px 20px rgba(255, 255, 255, 0.5),
+    10px 10px 20px rgba(70, 70, 70, 0.15);
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+label {
+  font-size: 18px;
+  color: rgba(125, 125, 125, 0.8);
+  text-align: left;
+}
+
+input[type="text"] {
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: none;
+  background: #cecece;
+  box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.5),
+    inset 5px 5px 10px rgba(70, 70, 70, 0.12);
+  color: rgba(125, 125, 125, 0.8);
+  outline: none;
+}
+
+input[type="text"]:focus {
+  box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.7),
+    inset 5px 5px 10px rgba(70, 70, 70, 0.18);
+}
+
+button {
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: none;
+  background: #cecece;
+  box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5),
+    5px 5px 10px rgba(70, 70, 70, 0.15);
+  color: rgba(125, 125, 125, 0.8);
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:hover {
+  box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.7),
+    5px 5px 10px rgba(70, 70, 70, 0.18);
+}
+
+button:active {
+  box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.5),
+    inset 5px 5px 10px rgba(70, 70, 70, 0.12);
+}
+
+#error-message {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 20px;
+  text-align: center;
+}

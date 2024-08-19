@@ -1,77 +1,121 @@
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500&display=swap");
 
-body{
-    background:#cecece;
-    padding:0;
-    margin:0;
-  }
-
-.general{
-    display: flex;
-    flex-direction: column;
-    padding: 50px 20px 70px 20px;
-    gap : 20px
-
+body {
+  background: #cecece;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
 }
 
-.years{
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: center;
+.general {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 20px 70px 20px;
+  gap: 20px;
 }
 
-.weeks{
-    display: flex;
-    justify-content:center;
-    flex-wrap: wrap;
+.years {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
 }
 
-  input{
-    height:25px;
-    width:25px;
-    -webkit-appearance:none;
-    box-shadow: 
-      -2px -2px 3px rgba(255,255,255, 0.8),
-      2px 2px 3px rgba(70,70,70, 0.5 );
-    
-    /*transform: translate(-50%, -50%);*/
-    /*top:50%;*/
-    left:50%;
-    border-radius:50%;
-    /*border:2px solid #cecece;*/
-    outline:none;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor: pointer;
-  }
-
-  input:checked{
-     box-shadow: 
-     -2px -2px 3px rgba(255,255,255, 0.8),
-     2px 2px 3px rgba(70,70,70, 0.5 ),
-     inset -2px -2px 3px rgba(255,255,255, 0.8),
-      inset 2px 2px 3px rgba(70,70,70, 0.5 );
-  }
-
-  h1{
-    font-weight: medium;
-    text-transform: uppercase;
-    font-size: 60px;
-    text-align: center;
-    font-family:'Hind Siliguri', sans-serif;
-    margin:0;
-    width : 100%;
-    padding-top : 4px;
-    color :rgba(125,125,125,0.8)
+.weeks {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
 }
 
-  p{
-      font-weight: medium;
-      font-family:'Hind Siliguri', sans-serif;
-      margin:0;
-      width:55px;
-      padding-top : 4px;
-      color :rgba(125,125,125,0.8)
-  }
+.pseudo {
+  width: 320px;
+  border-radius: 0;
+  border: 0px solid transparent;
+}
+
+input {
+  height: 20px;
+  width: 20px;
+  -webkit-appearance: none;
+  box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.8),
+    1px 1px 2px rgba(70, 70, 70, 0.5);
+  left: 50%;
+  border-radius: 50%;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+input:checked {
+  box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.8),
+    1px 1px 3px rgba(70, 70, 70, 0.5),
+    inset -1px -1px 3px rgba(255, 255, 255, 0.8),
+    inset 1px 1px 3px rgba(70, 70, 70, 0.5);
+}
+
+h1 {
+  font-weight: medium;
+  text-transform: uppercase;
+  font-size: 60px;
+  text-align: center;
+  font-family: "Hind Siliguri", sans-serif;
+  margin: 0;
+  width: 100%;
+  padding-top: 4px;
+  color: rgba(125, 125, 125, 0.8);
+}
+
+p {
+  font-weight: medium;
+  font-family: "Hind Siliguri", sans-serif;
+  margin: 0;
+  padding-top: 4px;
+  color: rgba(125, 125, 125, 0.8);
+}
+
+/* Nouveau style pour le header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #cecece;
+  gap: 200px;
+  /* box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.5),
+    5px 5px 15px rgba(70, 70, 70, 0.12);
+  border-radius: 20px;
+  margin-bottom: 20px; */
+}
+
+header h1 {
+  font-size: 30px;
+  text-align: left;
+  margin: 0;
+  color: rgba(125, 125, 125, 0.9);
+}
+
+header button {
+  padding: 10px 20px;
+  background: #cecece;
+  color: rgba(125, 125, 125, 0.9);
+  border: none;
+  border-radius: 12px;
+  box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5),
+    5px 5px 10px rgba(70, 70, 70, 0.12);
+  cursor: pointer;
+  font-family: "Hind Siliguri", sans-serif;
+  font-size: 14px;
+}
+
+header button:active {
+  box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.5),
+    inset 5px 5px 10px rgba(70, 70, 70, 0.12);
+}
+
+#loader {
+  font-size: 14px;
+  color: #00000090;
+  margin-left: 15px;
+}
