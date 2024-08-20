@@ -13,8 +13,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   try {
-    const data = await fetchBasketData(storedPseudo);
+    const [data, toggleState] = await fetchBasketData(storedPseudo);
     renderCalendar(data);
+    setToggle(toggleState);
   } catch (error) {
     console.error(
       "Erreur lors de la récupération des données du panier :",
@@ -39,10 +40,11 @@ async function fetchBasketData(basketName) {
     }
     const data = await response.json();
     CheckBoxState = data.value ? JSON.parse(data.value) : [];
-    return CheckBoxState;
+    const toggleState = data.toogleState ? JSON.parse(data.toogleState) : false;
+    return [CheckBoxState, toggleState];
   } catch (error) {
     console.error("Erreur lors de la récupération du panier : ", error);
-    return [];
+    return [[], false];
   }
 }
 
@@ -60,24 +62,20 @@ function renderCalendar(CheckBoxState) {
       count += 1;
     }
 
-    htmlyear += `<div class='weeks'><p style="width:44px">AN ${year}</p>${htmlweek}</div>`;
+    htmlyear += `<div class='weeks'><p style="width:20px;margin:0;padding:0;text-align:center">${year}</p>${htmlweek}</div>`;
   }
 
-  document.getElementById("year").innerHTML = htmlyear;
+  document.getElementById("years").innerHTML = htmlyear;
 }
 
-// Fonction pour ajouter des modifications au buffer et envoyer une requête
 function bufferCheck(value) {
   const state = document.getElementById(value).checked;
   buffer[value] = state;
 
-  // Mettre à jour CheckBoxState
   CheckBoxState[value] = state;
 
-  // Afficher le loader
   document.getElementById("loader").style.display = "block";
 
-  // Déclencher la mise à jour avec debounce
   if (debounceTimer) {
     clearTimeout(debounceTimer);
   }
@@ -88,7 +86,6 @@ function bufferCheck(value) {
   }, DEBOUNCE_DELAY);
 }
 
-// Fonction pour mettre à jour le panier
 async function updateBasket() {
   const storedPseudo = localStorage.getItem("pseudo");
   const pantryId = "3a4b5008-221a-4a4e-bf24-fbbc173c978c";
@@ -105,7 +102,7 @@ async function updateBasket() {
 
     if (response.ok) {
       console.log("Panier mis à jour avec succès");
-      buffer = []; // Réinitialiser le buffer après la mise à jour réussie
+      buffer = [];
     } else {
       const errorData = await response.json();
       console.error(
@@ -119,14 +116,89 @@ async function updateBasket() {
       error
     );
   } finally {
-    // Masquer le loader après la mise à jour
     document.getElementById("loader").style.display = "none";
   }
 }
 
-// Sauvegarde automatique avant de quitter la page
 window.addEventListener("beforeunload", () => {
   if (buffer.length > 0) {
     updateBasket();
   }
 });
+
+function setToggle(toggleState) {
+  const toggleInput = document.querySelector(".toggle-state");
+  const labelText = document.querySelector(".label-text");
+
+  if (toggleInput) {
+    // Définir l'état initial du toggle
+    toggleInput.checked = toggleState;
+
+    // Modifier l'interface en fonction de l'état initial
+    if (toggleState) {
+      setWeeksAndYearsStyles("column", "row", "Vertical");
+    } else {
+      setWeeksAndYearsStyles("row", "column", "Horizontal");
+    }
+
+    // Écouter les changements d'état
+    toggleInput.addEventListener("change", function () {
+      const newState = toggleInput.checked;
+      updateToggleState(newState); // Mettre à jour l'état du toggle dans l'API
+
+      if (newState) {
+        setWeeksAndYearsStyles("column", "row", "Vertical");
+      } else {
+        setWeeksAndYearsStyles("row", "column", "Horizontal");
+      }
+    });
+  }
+}
+
+function setWeeksAndYearsStyles(
+  weeksDirection,
+  yearsDirection,
+  labelTextValue
+) {
+  const weeks = document.querySelectorAll(".weeks");
+  const years = document.querySelector(".years");
+  const labelText = document.querySelector(".label-text");
+
+  weeks.forEach((week) => {
+    week.style.flexDirection = weeksDirection;
+  });
+
+  years.style.flexDirection = yearsDirection;
+  labelText.textContent = labelTextValue;
+}
+
+async function updateToggleState(newState) {
+  const storedPseudo = localStorage.getItem("pseudo");
+  const pantryId = "3a4b5008-221a-4a4e-bf24-fbbc173c978c";
+  const apiUrl = `https://getpantry.cloud/apiv1/pantry/${pantryId}/basket/${storedPseudo}`;
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ toogleState: newState }),
+    });
+
+    if (response.ok) {
+      console.log("État du toggle mis à jour avec succès");
+    } else {
+      const errorData = await response.json();
+      console.error(
+        "Erreur lors de la mise à jour de l'état du toggle : ",
+        errorData.message || "Veuillez réessayer."
+      );
+    }
+  } catch (error) {
+    console.error(
+      "Erreur réseau ou autre lors de la mise à jour de l'état du toggle :",
+      error
+    );
+  }
+}

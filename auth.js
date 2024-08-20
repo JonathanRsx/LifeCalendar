@@ -48,7 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ value: JSON.stringify(initialArray) }), // Créer un panier vide ou selon ce que l'API attend
+              body: JSON.stringify({
+                value: JSON.stringify(initialArray),
+                toogleState: false,
+              }), // Créer un panier vide ou selon ce que l'API attend
             });
 
             if (postResponse.ok) {

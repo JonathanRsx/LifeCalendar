@@ -12,12 +12,24 @@
         <h1>Life Calendar</h1>
         <div style="display: flex; align-items: center; gap: 32px">
           <p id="loader" style="display: none">Saving...</p>
+          <label class="label">
+            <div class="toggle">
+              <input
+                class="toggle-state"
+                type="checkbox"
+                name="check"
+                value="check"
+              />
+              <div class="indicator"></div>
+            </div>
+            <p class="label-text">Horizontal</p>
+          </label>
+
           <p id="user-pseudo">Pseudo</p>
           <button id="logout-btn">Déconnexion</button>
         </div>
       </header>
-
-      <div id="year" class="years"></div>
+      <div id="years" class="years"></div>
     </div>
 
     <script src="calendar.js"></script>
