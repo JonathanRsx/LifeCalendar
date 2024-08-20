@@ -60,7 +60,7 @@ function renderCalendar(CheckBoxState) {
       count += 1;
     }
 
-    htmlyear += `<div class='weeks'><p>AN ${year}</p>${htmlweek}</div>`;
+    htmlyear += `<div class='weeks'><p style="width:44px">AN ${year}</p>${htmlweek}</div>`;
   }
 
   document.getElementById("year").innerHTML = htmlyear;
