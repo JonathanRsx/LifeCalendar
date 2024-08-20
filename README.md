@@ -1,1 +1,1 @@
-# LifeCalendar v2
+# LifeCalendar
